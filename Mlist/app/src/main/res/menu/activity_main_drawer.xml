@@ -7,11 +7,11 @@
 
         <item
             android:id="@+id/nav_now_playing"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_video"
             android:title="@string/nav_now_playing" />
         <item
             android:id="@+id/nav_upcoming"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_play_next"
             android:title="@string/nav_upcoming" />
     </group>
 
@@ -19,7 +19,7 @@
         <menu>
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_clear_black"
                 android:title="@string/nav_logout" />
 
         </menu>

@@ -1,7 +1,8 @@
-package com.example.prabhakarananbazhag.mlist.models;
+package com.example.prabhakarananbazhag.mlist.activities.models;
 
-public class Movies {
+import java.io.Serializable;
 
+public class Movie implements Serializable{
     String id;
     String title;
     String overview;
@@ -9,17 +10,6 @@ public class Movies {
     float voteCount;
     String posterPath;
     String backdropPath;
-
-
-    public Movies(String id, String title, String overview, float voteAverage, float voteCount, String posterPath, String backdropPath) {
-        this.id = id;
-        this.title = title;
-        this.overview = overview;
-        this.voteAverage = voteAverage;
-        this.voteCount = voteCount;
-        this.posterPath = posterPath;
-        this.backdropPath = backdropPath;
-    }
 
     public String getId() {
         return id;
@@ -62,7 +52,7 @@ public class Movies {
     }
 
     public String getPosterPath() {
-        return String.format("https://image.tmdb.org/t/p/w342%s", posterPath);
+        return posterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -70,10 +60,20 @@ public class Movies {
     }
 
     public String getBackdropPath() {
-        return String.format("https://image.tmdb.org/t/p/w780%s", backdropPath);
+        return backdropPath;
     }
 
     public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
+    }
+
+    public Movie(String id, String title, String overview, float voteAverage, float voteCount, String posterPath, String backdropPath) {
+        this.id = id;
+        this.title = title;
+        this.overview = overview;
+        this.voteAverage = voteAverage;
+        this.voteCount = voteCount;
+        this.posterPath = posterPath;
         this.backdropPath = backdropPath;
     }
 }
