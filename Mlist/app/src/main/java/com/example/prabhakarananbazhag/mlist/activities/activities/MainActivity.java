@@ -1,6 +1,8 @@
 package com.example.prabhakarananbazhag.mlist.activities.activities;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -90,6 +92,11 @@ Class fragment=null;
 fragment= UpcomingFragment.class;
 showFragment(fragment);
         } else if (id == R.id.nav_logout) {
+            SharedPreferences sharedPreferences=getSharedPreferences(LoginActivity.MyPREFECENCES, Context.MODE_PRIVATE);
+          SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.clear();
+            editor.commit();
+            finish();
 
         }
 
