@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -94,6 +95,7 @@ showFragment(fragment);
         } else if (id == R.id.nav_logout) {
             SharedPreferences sharedPreferences=getSharedPreferences(LoginActivity.MyPREFECENCES, Context.MODE_PRIVATE);
           SharedPreferences.Editor editor=sharedPreferences.edit();
+
             editor.clear();
             editor.commit();
             finish();

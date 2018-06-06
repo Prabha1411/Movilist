@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -25,9 +26,9 @@ import static android.support.constraint.Constraints.TAG;
 
 public class LoginActivity extends Activity {
  public static final String MyPREFECENCES = "mypref";
-    public static final String Name="namekey";
+    /*public static final String Name="namekey";
     public static final String Email = "emailkey";
-    public static final String Pass = "passkey";
+    public static final String Pass = "passkey";*/
     SharedPreferences sharedPreferences;
     @BindView(R.id.input_email)
     EditText input_email;
@@ -39,6 +40,7 @@ public class LoginActivity extends Activity {
     TextView linksignup;
     @BindView(R.id.input_name)
     EditText input_name;
+    public AwesomeValidation awesomeValidation;
 
 
     @Override
@@ -56,35 +58,38 @@ public class LoginActivity extends Activity {
                 String em = input_email.getText().toString();
                 String pa = input_password.getText().toString();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(Name,nam);
-                editor.putString(Email, em);
-                editor.putString(Pass, pa);
+                editor.putString("namekey",nam);
+                editor.putString("emailkey", em);
+                editor.putString("passkey", pa);
                 editor.commit();
                SharedPreferences set=getSharedPreferences(MyPREFECENCES,MODE_PRIVATE);
                String namvalue=set.getString("namekey1","");
                String emlvalue=set.getString("emailkey1","");
-               String pasvalue=set.getString("passskey1","");
+               String pasvalue=set.getString("passkey1","");
 
-              // Log.i(namvalue,TAG);
-               // Log.i(emlvalue,TAG);
-               // Log.i(pasvalue,TAG);
-               /*if((nam!=namvalue)&&(em==emlvalue)&&(pa==pasvalue)){
-                   Toast.makeText(getApplicationContext(), " uccessfull", Toast.LENGTH_LONG).show();
+               //String nameentered = nam.toString();
+              // String namecheck = namvalue.toString();
+             //  String password=pa.toString();
+              // String passwordchk=pasvalue.toString();
+                //(nameentered.equals(namecheck))&&(password.equals(passwordchk))&&
+                awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+                awesomeValidation.addValidation(LoginActivity.this, R.id.input_name,"^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
+                awesomeValidation.addValidation(LoginActivity.this, R.id.input_email, Patterns.EMAIL_ADDRESS, R.string.emailerror);
+
+                if(awesomeValidation.validate()){
+                    //Toast.makeText(LoginActivity.this, "Registration Successfull", Toast.LENGTH_LONG).show();
+                }
+
+
+               if((namvalue.equals(nam))&&(pasvalue.equals(pa))&&(emlvalue.equals(em))){
                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
                    startActivity(i);
+               }
+
+                else{
+                   Toast.makeText(getApplicationContext(), " Invalid Username or Password", Toast.LENGTH_LONG).show();
 
                }
-else{
-                   Toast.makeText(getApplicationContext(), " UnSuccessfull", Toast.LENGTH_LONG).show();
-
-               }*/
-
-
-
-              //  Intent i = new Intent(LoginActivity.this, MainActivity.class);
-              //      startActivity(i);
-
-
 
             }
         });
