@@ -64,6 +64,7 @@ public class LoginActivity extends Activity {
                String namvalue=set.getString("namekey1","");
                String emlvalue=set.getString("emailkey1","");
                String pasvalue=set.getString("passskey1","");
+
               // Log.i(namvalue,TAG);
                // Log.i(emlvalue,TAG);
                // Log.i(pasvalue,TAG);
