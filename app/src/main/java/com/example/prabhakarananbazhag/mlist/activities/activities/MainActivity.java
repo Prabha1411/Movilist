@@ -3,6 +3,7 @@ package com.example.prabhakarananbazhag.mlist.activities.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.design.internal.NavigationMenuPresenter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -18,15 +19,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.prabhakarananbazhag.mlist.R;
+import com.example.prabhakarananbazhag.mlist.activities.Detail;
 import com.example.prabhakarananbazhag.mlist.activities.fragments.NowPlayingFragment;
 import com.example.prabhakarananbazhag.mlist.activities.fragments.UpcomingFragment;
+import com.google.gson.Gson;
+
+import static com.example.prabhakarananbazhag.mlist.activities.activities.SignupActivity.MyPREFECENCES;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+TextView t1,t2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,21 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+       NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+      SharedPreferences set = getSharedPreferences(MyPREFECENCES, MODE_PRIVATE);
+        Gson gson = new Gson();
+
+
+        String json = set.getString(LoginActivity.userName, "");
+       Log.i("json", json);
+        Detail detail = gson.fromJson(json, Detail.class);
+
+        View header = navigationView.getHeaderView(0);
+        t1 = ((TextView) header.findViewById(R.id.headname));
+       t2=((TextView) header.findViewById(R.id.headsubname));
+
+       t1.setText(detail.name);
+        t2.setText(detail.email);
         navigationView.setNavigationItemSelectedListener(this);
         showFragment(NowPlayingFragment.class);
 
@@ -93,18 +113,17 @@ Class fragment=null;
 fragment= UpcomingFragment.class;
 showFragment(fragment);
         } else if (id == R.id.nav_logout) {
-            SharedPreferences sharedPreferences=getSharedPreferences(LoginActivity.MyPREFECENCES, Context.MODE_PRIVATE);
-          SharedPreferences.Editor editor=sharedPreferences.edit();
-
-            editor.clear();
-            editor.commit();
-            finish();
+finish();
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void updateNavigationViewHeader(){
+
+
     }
 
     private void showFragment(Class fragmentClass) {
@@ -119,4 +138,7 @@ showFragment(fragment);
         FragmentManager fragmentManager=getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flcontent,fragment).commit();
     }
+
+
+
 }

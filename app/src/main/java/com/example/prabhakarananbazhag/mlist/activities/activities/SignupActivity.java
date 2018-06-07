@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.EditText;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.prabhakarananbazhag.mlist.R;
+import com.example.prabhakarananbazhag.mlist.activities.Detail;
+import com.google.gson.Gson;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
@@ -92,15 +95,21 @@ public class SignupActivity extends Activity implements Validator.ValidationList
     }
 
     private void signUp() {
-        String nam=input_name.getText().toString();
-        String em = input_email.getText().toString();
-        String pa = input_password.getText().toString();
+        String name=input_name.getText().toString();
+        String email = input_email.getText().toString();
+        String pass = input_password.getText().toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        editor.putString("namekey1",nam);
-        editor.putString("emailkey1", em);
-        editor.putString("passkey1", pa);
+        Gson gson = new Gson();
+        Detail detail=new Detail(name,email,pass);
+        String json = gson.toJson(detail);
+        Log.i("json ",json);
+        editor.putString(email,json);
         editor.commit();
+
+//        editor.putString("namekey1",name);
+//        editor.putString("emailkey1",email);
+//        editor.putString("passkey1",pass);
+
         //  awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         //  awesomeValidation.addValidation(SignupActivity.this, R.id.input_name,"^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
         //  awesomeValidation.addValidation(SignupActivity.this, R.id.input_email, Patterns.EMAIL_ADDRESS, R.string.emailerror);
