@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
@@ -78,7 +80,7 @@ public class SignupActivity extends Activity implements Validator.ValidationList
         validator.setValidationListener(this);
         validator.setValidationMode(Validator.Mode.BURST);
 
-        sharedPreferences = getSharedPreferences(MyPREFECENCES, Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(getString(R.string.MovieListFile),0);
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +104,7 @@ public class SignupActivity extends Activity implements Validator.ValidationList
         Gson gson = new Gson();
         Detail detail=new Detail(name,email,pass);
         String json = gson.toJson(detail);
-        Log.i("json ",json);
+        //Log.i("json ",json);
         editor.putString(email,json);
         editor.commit();
 

@@ -2,6 +2,7 @@ package com.example.prabhakarananbazhag.mlist.activities.activities;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.internal.NavigationMenuPresenter;
 import android.support.v4.app.Fragment;
@@ -49,7 +50,7 @@ TextView t1,t2;
         toggle.syncState();
 
        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-      SharedPreferences set = getSharedPreferences(MyPREFECENCES, MODE_PRIVATE);
+      SharedPreferences set = getSharedPreferences(getString(R.string.MovieListFile), 0);
         Gson gson = new Gson();
 
 
@@ -61,7 +62,7 @@ TextView t1,t2;
         t1 = ((TextView) header.findViewById(R.id.headname));
        t2=((TextView) header.findViewById(R.id.headsubname));
 
-       t1.setText(detail.name);
+        t1.setText(detail.name);
         t2.setText(detail.email);
         navigationView.setNavigationItemSelectedListener(this);
         showFragment(NowPlayingFragment.class);
@@ -113,7 +114,13 @@ Class fragment=null;
 fragment= UpcomingFragment.class;
 showFragment(fragment);
         } else if (id == R.id.nav_logout) {
-finish();
+            SharedPreferences.Editor sharedPreferences=getSharedPreferences(getString(R.string.MovieListFile),0).edit();
+            sharedPreferences.clear();
+            sharedPreferences.commit();
+            finish();
+            Intent k=new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(k);
+            finish();
 
         }
 

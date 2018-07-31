@@ -3,13 +3,13 @@ package com.example.prabhakarananbazhag.mlist.activities.models;
 import java.io.Serializable;
 
 public class Movie implements Serializable{
-    String id;
-    String title;
-    String overview;
-    float voteAverage;
-    float voteCount;
-    String posterPath;
-    String backdropPath;
+    String  id;
+    String  title;
+    String  overview;
+    float   voteAverage;
+    float   voteCount;
+    String  posterPath;
+    String  backdropPath;
 
     public String getId() {
         return id;
@@ -31,41 +31,15 @@ public class Movie implements Serializable{
         return overview;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    public float getVoteAverage() {
-        return voteAverage;
-    }
-
-    public void setVoteAverage(float voteAverage) {
-        this.voteAverage = voteAverage;
-    }
-
-    public float getVoteCount() {
-        return voteCount;
-    }
-
-    public void setVoteCount(float voteCount) {
-        this.voteCount = voteCount;
-    }
 
     public String getPosterPath() {
         return posterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
     }
 
     public String getBackdropPath() {
         return backdropPath;
     }
 
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
-    }
 
     public Movie(String id, String title, String overview, float voteAverage, float voteCount, String posterPath, String backdropPath) {
         this.id = id;

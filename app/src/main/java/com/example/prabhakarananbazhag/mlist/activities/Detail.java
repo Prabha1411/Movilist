@@ -10,4 +10,5 @@ public class Detail {
         this.email = email;
         this.pass = pass;
     }
+
 }

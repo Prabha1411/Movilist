@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.util.Log;
@@ -19,7 +22,10 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 
 import com.example.prabhakarananbazhag.mlist.R;
 import com.example.prabhakarananbazhag.mlist.activities.Detail;
+import com.example.prabhakarananbazhag.mlist.activities.fragments.UpcomingFragment;
 import com.google.gson.Gson;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,13 +50,18 @@ public class LoginActivity extends Activity {
     public AwesomeValidation awesomeValidation;
 public static String userName;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
-        sharedPreferences = getSharedPreferences(MyPREFECENCES, Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(getString(R.string.MovieListFile), 0);
+        //shortcutManager=getSystemService(ShortcutManager.class);
+
+       // Intent intentpassenger=new Intent(this,MainActivity.class);
+      //  intentpassenger.setAction(Intent.ACTION_VIEW);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,18 +75,18 @@ public static String userName;
 //                editor.putString("passkey", pa);
 //                editor.commit();
 
-                SharedPreferences set = getSharedPreferences(MyPREFECENCES, MODE_PRIVATE);
+                SharedPreferences set = getSharedPreferences(getString(R.string.MovieListFile), 0);
+              //  set.getBoolean(getString(R.string.isLoggedIn),false);
                 if (set.contains(em)) {
                     Gson gson = new Gson();
                     String json = set.getString(em, "");
                     Log.i("json", json);
 
                     Detail detail = gson.fromJson(json, Detail.class);
-
-            /*   String emlvalue=set.getString("emailkey1","");
-                String pasvalue=set.getString("passkey1","");
-                String namvalue=set.getString("namekey1","");
-*/
+//
+//               String emlvalue=set.getString("emailkey1","");
+//                 String pasvalue=set.getString("passkey1","");
+//                String namvalue=set.getString("namekey1","");
 //               String emailentered = em.toString();
 //               String emailcheck = emlvalue.toString();
 //               String password=pa.toString();
@@ -91,12 +102,19 @@ public static String userName;
 
                     if ((pa.equals(detail.pass)) && (em.equals(detail.email))) {
                         userName=em;
+
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.MovieListFile), 0).edit();
+                        editor.putBoolean(getString(R.string.isLoggedIn), true);
+                        editor.commit();
                         startActivity(i);
+                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(), " Invalid Username or Password", Toast.LENGTH_LONG).show();
 
                     }
+                }else {
+                    Toast.makeText(getApplicationContext(), " Create account", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -105,9 +123,13 @@ public static String userName;
         linksignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent s = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(s);
+                finish();
+
             }
         });
     }
+
 }
