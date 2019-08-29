@@ -24,9 +24,10 @@ import butterknife.ButterKnife;
  */
 public class UpcomingFragment extends Fragment {
 
-private List<Movie> movies;
+    private List<Movie> movies;
     @BindView(R.id.rvMovies)
     RecyclerView rvmoview;
+
     public UpcomingFragment() {
         // Required empty public constructor
     }
@@ -36,10 +37,10 @@ private List<Movie> movies;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_upcoming, container, false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_upcoming, container, false);
+        ButterKnife.bind(this, view);
         initializeData();
-        LinearLayoutManager llm=new LinearLayoutManager(this.getContext());
+        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         rvmoview.setHasFixedSize(true);
         rvmoview.setLayoutManager(llm);
         MovieRecyclerViewAdapter adapter = new MovieRecyclerViewAdapter(getContext(), movies);

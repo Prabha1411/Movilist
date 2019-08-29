@@ -1,20 +1,15 @@
 package com.example.prabhakarananbazhag.mlist.activities.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Point;
-import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +33,7 @@ import butterknife.ButterKnife;
 
 public class SignupActivity extends Activity implements Validator.ValidationListener {
 
-    public static final String MyPREFECENCES = "mypref";
     SharedPreferences sharedPreferences;
-    /*public static final String Name1="namekey1";
-    public static final String Email1 = "emailkey1";
-    public static final String Pass1 = "passkey1";*/
 
     @Order(1)
     @NotEmpty
@@ -80,7 +71,7 @@ public class SignupActivity extends Activity implements Validator.ValidationList
         validator.setValidationListener(this);
         validator.setValidationMode(Validator.Mode.BURST);
 
-        sharedPreferences = getSharedPreferences(getString(R.string.MovieListFile),0);
+        sharedPreferences = getSharedPreferences(getString(R.string.MovieListFile), 0);
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,29 +87,18 @@ public class SignupActivity extends Activity implements Validator.ValidationList
         });
     }
 
-    private void signUp() {
-        String name=input_name.getText().toString();
+    public void signUp() {
+        String name = input_name.getText().toString();
         String email = input_email.getText().toString();
         String pass = input_password.getText().toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        Detail detail=new Detail(name,email,pass);
+        Detail detail = new Detail(name, email, pass);
         String json = gson.toJson(detail);
-        //Log.i("json ",json);
-        editor.putString(email,json);
+        editor.putString(email, json);
+
         editor.commit();
 
-//        editor.putString("namekey1",name);
-//        editor.putString("emailkey1",email);
-//        editor.putString("passkey1",pass);
-
-        //  awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        //  awesomeValidation.addValidation(SignupActivity.this, R.id.input_name,"^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
-        //  awesomeValidation.addValidation(SignupActivity.this, R.id.input_email, Patterns.EMAIL_ADDRESS, R.string.emailerror);
-        //awesomeValidation.addValidation(SignupActivity.this, R.id.input_password, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.passworderror);
-        //  if(awesomeValidation.validate()){
-        //      Toast.makeText(SignupActivity.this, "Registration Successfull", Toast.LENGTH_LONG).show();
-        //  }
         Intent i = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(i);
     }

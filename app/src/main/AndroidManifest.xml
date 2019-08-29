@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.activities.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.activities.MainActivity"
@@ -27,11 +31,7 @@
         </activity>
         <activity android:name=".activities.activities.SignupActivity" />
         <activity android:name=".activities.activities.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         <!--    <meta-data android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />-->
         </activity>

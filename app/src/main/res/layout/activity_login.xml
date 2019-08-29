@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/contentView"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -28,14 +29,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionDone"
+                />
         </android.support.design.widget.TextInputLayout>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:visibility="gone"
+            />
 
         <android.support.design.widget.TextInputLayout
             app:passwordToggleEnabled="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:visibility="visible"
             android:layout_marginTop="8dp">
 
             <EditText

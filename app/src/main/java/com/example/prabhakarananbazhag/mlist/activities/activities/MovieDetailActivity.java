@@ -47,13 +47,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
-            //Log.i("hh","jkkj");
             movie = (Movie) extras.getSerializable("Movie1");
             Log.i("movie", movie.getTitle());
             this.setTitle(movie.getTitle());
             tvoview1.setText(movie.getOverview());
             Picasso.with(this).load(movie.getBackdropPath()).into(ivMovieBackdrop);
-
 
         }
 

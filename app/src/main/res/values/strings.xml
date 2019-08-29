@@ -23,6 +23,8 @@
     <!--File-->
     <string name="MovieListFile">MovieListFile</string>
     <string name="isLoggedIn">isLoggedIn</string>
+    <string name="isLoggedUser">isLoggedUser</string>
+
 
 
 
